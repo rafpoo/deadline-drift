@@ -7,10 +7,12 @@ public class Character : MonoBehaviour
     public SIDE side = SIDE.MID;
     public float xValue = 3f;
     public float laneSpeed = 5.5f;
+    public float jumpForce = 1.4f;
+    public float gravity = -20f;
 
     private CharacterController CharController;
     private Vector3 velocity = Vector3.zero;
-    private float gravity = -9.81f;
+
     private float newXPos = 0f;
     private float currentX;
     private Animator anim;
@@ -65,14 +67,24 @@ public class Character : MonoBehaviour
             anim.SetBool("IsRunning", false);
             anim.SetTrigger("DodgeRight");
         }
+        else if (Input.GetKeyDown(KeyCode.Space) && CharController.isGrounded)
+        {
+            velocity.y = jumpForce;
+            anim.SetBool("IsRunning", false);
+            anim.SetTrigger("Jump");
+        }
     }
 
     void ApplyGravity()
     {
-        if (!CharController.isGrounded)
-            velocity.y += gravity * Time.deltaTime;
+        if (CharController.isGrounded && velocity.y < 0)
+        {
+            velocity.y = -1f; // Small negative value to keep the character grounded
+        }
         else
-            velocity.y = -1f; // kecil negatif agar tetap grounded
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
     }
 
     void MoveCharacter()
@@ -81,6 +93,7 @@ public class Character : MonoBehaviour
 
         Vector3 move = Vector3.zero;
         move.x = nextX - currentX;
+        move.y = velocity.y;
         move += velocity * Time.deltaTime;
 
         CharController.Move(move);
@@ -97,5 +110,11 @@ public class Character : MonoBehaviour
         anim.CrossFade("Run", 0.1f);
     }
 
-
+    public void OnJumpEnd()
+    {
+        Debug.Log("Jump animation ended");
+        anim.ResetTrigger("Jump");
+        anim.SetBool("IsRunning", true);
+        anim.CrossFade("Run", 0.1f);
+    }
 }
