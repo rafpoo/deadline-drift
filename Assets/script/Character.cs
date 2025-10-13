@@ -5,8 +5,8 @@ public enum SIDE { LEFT, MID, RIGHT }
 public class Character : MonoBehaviour
 {
     public SIDE side = SIDE.MID;
-    public float xValue = 2f;
-    public float laneSpeed = 5f;
+    public float xValue = 3f;
+    public float laneSpeed = 5.5f;
 
     private CharacterController CharController;
     private Vector3 velocity = Vector3.zero;
@@ -68,7 +68,7 @@ public class Character : MonoBehaviour
 
     void MoveCharacter()
     {
-        float nextX = Mathf.MoveTowards(currentX, newXPos, laneSpeed * Time.deltaTime);
+        float nextX = Mathf.Lerp(currentX, newXPos, laneSpeed * Time.deltaTime);
 
         Vector3 move = Vector3.zero;
         move.x = nextX - currentX;
