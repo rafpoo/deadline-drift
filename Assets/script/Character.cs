@@ -13,12 +13,15 @@ public class Character : MonoBehaviour
     private float gravity = -9.81f;
     private float newXPos = 0f;
     private float currentX;
+    private Animator anim;
 
     void Start()
     {
         CharController = GetComponent<CharacterController>();
         // newXPos = transform.position.x;
         currentX = newXPos;
+        anim = GetComponent<Animator>();
+        anim.SetBool("IsRunning", true);
     }
 
     void Update()
@@ -32,6 +35,7 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
+
             if (side == SIDE.MID)
             {
                 newXPos = -xValue;
@@ -42,9 +46,12 @@ public class Character : MonoBehaviour
                 newXPos = 0f;
                 side = SIDE.MID;
             }
+            anim.SetBool("IsRunning", false);
+            anim.SetTrigger("DodgeLeft");
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
+            anim.SetTrigger("DodgeRight");
             if (side == SIDE.MID)
             {
                 newXPos = xValue;
@@ -55,6 +62,8 @@ public class Character : MonoBehaviour
                 newXPos = 0f;
                 side = SIDE.MID;
             }
+            anim.SetBool("IsRunning", false);
+            anim.SetTrigger("DodgeRight");
         }
     }
 
@@ -78,5 +87,15 @@ public class Character : MonoBehaviour
         currentX = nextX;
         Debug.Log($"currentX={currentX}, newXPos={newXPos}");
     }
+
+    public void OnDodgeEnd()
+    {
+        Debug.Log("Dodge animation ended");
+        anim.ResetTrigger("DodgeLeft");
+        anim.ResetTrigger("DodgeRight");
+        anim.SetBool("IsRunning", true);
+        anim.CrossFade("Run", 0.1f);
+    }
+
 
 }
