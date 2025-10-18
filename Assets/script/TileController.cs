@@ -13,6 +13,8 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float playerZOffset = -5f;
     [SerializeField] private float playerXOffset = 0.29f;
     [SerializeField] private float recycleDistanceMultiplier = 1.5f;
+    [SerializeField] private Transform playerSpawnPoint; // assign di Inspector
+
 
 
     private List<GameObject> activeTiles = new List<GameObject>();
@@ -26,15 +28,18 @@ public class TileManager : MonoBehaviour
             SpawnTile(i < 2 ? 0 : Random.Range(0, tilePrefabs.Length));
         }
 
-        if (player != null && activeTiles.Count > 0)
+        if (player != null)
         {
-            Vector3 startPos = activeTiles[0].transform.position;
-            player.position = new Vector3(
-                startPos.x + playerXOffset,
-                startPos.y + playerYOffset,
-                startPos.z + playerZOffset
-            );
+            // Gunakan spawn point khusus jika diset
+            if (playerSpawnPoint != null)
+                player.position = playerSpawnPoint.position;
+            else if (activeTiles.Count > 0)
+            {
+                Vector3 startPos = activeTiles[0].transform.position;
+                player.position = new Vector3(startPos.x, startPos.y + playerYOffset, startPos.z + playerZOffset);
+            }
         }
+
     }
 
     void Update()

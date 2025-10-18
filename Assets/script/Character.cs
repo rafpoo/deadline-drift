@@ -1,29 +1,36 @@
+using System.Collections;
 using UnityEngine;
 
 public enum SIDE { LEFT, MID, RIGHT }
 
+[RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
     public SIDE side = SIDE.MID;
-    public float xValue = 3f;
-    public float laneSpeed = 5.5f;
-    public float jumpForce = 1.4f;
-    public float gravity = -20f;
+    public float laneDistance = 3f;
+    public float laneChangeSpeed = 8f;
+    public float jumpForce = 10f;
+    public float gravity = -30f;
+    public float forwardSpeed = 2f;
+    public float xValue = 3f; // bukan -3f
 
-    private CharacterController CharController;
-    private Vector3 velocity = Vector3.zero;
 
-    private float newXPos = 0f;
-    private float currentX;
+    private CharacterController controller;
     private Animator anim;
+    private Vector3 verticalVelocity;
+    private float targetX;
 
-    void Start()
+    private bool gravityEnabled = false;
+
+    IEnumerator Start()
     {
-        CharController = GetComponent<CharacterController>();
-        // newXPos = transform.position.x;
-        currentX = newXPos;
+        controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        targetX = transform.position.x;
         anim.SetBool("IsRunning", true);
+
+        yield return new WaitForSeconds(0.1f);
+        gravityEnabled = true;
     }
 
     void Update()
@@ -37,80 +44,115 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-
             if (side == SIDE.MID)
             {
-                newXPos = -xValue;
+                targetX = -laneDistance; // kiri = negatif
                 side = SIDE.LEFT;
             }
             else if (side == SIDE.RIGHT)
             {
-                newXPos = 0f;
+                targetX = 0f;
                 side = SIDE.MID;
             }
-            anim.SetBool("IsRunning", false);
             anim.SetTrigger("DodgeLeft");
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            anim.SetTrigger("DodgeRight");
             if (side == SIDE.MID)
             {
-                newXPos = xValue;
+                targetX = laneDistance; // kanan = positif
                 side = SIDE.RIGHT;
             }
             else if (side == SIDE.LEFT)
             {
-                newXPos = 0f;
+                targetX = 0f;
                 side = SIDE.MID;
             }
-            anim.SetBool("IsRunning", false);
             anim.SetTrigger("DodgeRight");
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && CharController.isGrounded)
+
+
+        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
-            velocity.y = jumpForce;
-            anim.SetBool("IsRunning", false);
-            anim.SetTrigger("Jump");
+            Jump();
         }
+    }
+
+    void Jump()
+    {
+        verticalVelocity.y = jumpForce;
+        anim.SetBool("IsRunning", false);
+        anim.ResetTrigger("Jump");
+        anim.SetTrigger("Jump");
     }
 
     void ApplyGravity()
     {
-        if (CharController.isGrounded && velocity.y < 0)
+        if (!gravityEnabled) return;
+
+        if (controller.isGrounded && verticalVelocity.y < 0)
         {
-            velocity.y = -1f; // Small negative value to keep the character grounded
+            verticalVelocity.y = -1f;
         }
         else
         {
-            velocity.y += gravity * Time.deltaTime;
+            verticalVelocity.y += gravity * Time.deltaTime;
         }
     }
 
     void MoveCharacter()
     {
-        float nextX = Mathf.Lerp(currentX, newXPos, laneSpeed * Time.deltaTime);
+        float nextX = Mathf.Lerp(transform.position.x, targetX, Time.deltaTime * laneChangeSpeed);
+        float moveX = nextX - transform.position.x;
 
-        Vector3 move = Vector3.zero;
-        move.x = nextX - currentX;
-        move.y = velocity.y;
-        move += velocity * Time.deltaTime;
+        Vector3 move = new Vector3(moveX, 0f, forwardSpeed * Time.deltaTime);
+        move.y = verticalVelocity.y * Time.deltaTime;
 
-        CharController.Move(move);
-        currentX = nextX;
+        controller.Move(move);
     }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("Obstacle"))
+        {
+            // Hit normal mengarah ke belakang player?
+            Vector3 hitDir = hit.normal; // arah permukaan yang ditabrak
+
+            // Asumsi player menghadap ke depan (Z+)
+            bool frontalHit = Vector3.Dot(hitDir, Vector3.back) > 0.5f;
+
+            if (frontalHit)
+            {
+                Debug.Log("💥 Player menabrak obstacle dari depan!");
+                GameOver();
+            }
+        }
+    }
+
+    void GameOver()
+    {
+        Debug.Log("GAME OVER!");
+
+        anim.SetBool("IsRunning", false);
+        anim.SetTrigger("Death"); // pastikan punya animasi "Death"
+
+        // Nonaktifkan pergerakan
+        enabled = false;
+
+        // (Opsional) Panggil UI manager / restart scene
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+
 
     public void OnDodgeEnd()
     {
-        anim.ResetTrigger("DodgeLeft");
-        anim.ResetTrigger("DodgeRight");
         anim.SetBool("IsRunning", true);
         anim.CrossFade("Run", 0.1f);
     }
 
     public void OnJumpEnd()
     {
-        anim.ResetTrigger("Jump");
         anim.SetBool("IsRunning", true);
         anim.CrossFade("Run", 0.1f);
     }
