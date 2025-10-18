@@ -1,47 +1,92 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TileController : MonoBehaviour
+public class TileManager : MonoBehaviour
 {
     [Header("Tile Settings")]
-    [SerializeField] float speed = 10f;
-    [SerializeField] float destroyZ = -25f;
-    [SerializeField] float spawnTriggerZ = -15f;
-    [SerializeField] GameObject nextTilePrefab;
-    [SerializeField] Transform spawnPoint;
+    [SerializeField] private GameObject[] tilePrefabs;
+    [SerializeField] private int numberOfTiles = 10;
+    [SerializeField] private float tileLength = 49.48f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Transform player;
+    [SerializeField] private float playerYOffset = 1f;
+    [SerializeField] private float playerZOffset = -5f;
+    [SerializeField] private float playerXOffset = 0.29f;
+    [SerializeField] private float recycleDistanceMultiplier = 1.5f;
 
-    bool hasSpawnedNext = false;
+
+    private List<GameObject> activeTiles = new List<GameObject>();
+    private float spawnZ = 0f;
+    private int tes = 0;
+
+    void Start()
+    {
+        for (int i = 0; i < numberOfTiles; i++)
+        {
+            SpawnTile(i < 2 ? 0 : Random.Range(0, tilePrefabs.Length));
+        }
+
+        if (player != null && activeTiles.Count > 0)
+        {
+            Vector3 startPos = activeTiles[0].transform.position;
+            player.position = new Vector3(
+                startPos.x + playerXOffset,
+                startPos.y + playerYOffset,
+                startPos.z + playerZOffset
+            );
+        }
+    }
 
     void Update()
     {
-        // Gerakkan tile mundur
-        transform.Translate(Vector3.back * speed * Time.deltaTime, Space.World);
+        foreach (var tile in activeTiles)
+            tile.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
 
-        // Spawn tile berikutnya kalau sudah cukup jauh
-        if (!hasSpawnedNext && transform.position.z <= spawnTriggerZ)
+        GameObject firstTile = activeTiles[0];
+
+        // Hitung jarak player ke tile paling belakang
+        float distanceFromPlayer = player.position.z - firstTile.transform.position.z;
+
+        // Jika player sudah cukup jauh dari tile belakang → geser tile ke depan
+        if (distanceFromPlayer > tileLength * recycleDistanceMultiplier)
         {
-            SpawnNextTile();
-            hasSpawnedNext = true;
+            MoveTileToFront(firstTile);
         }
 
-        // Hapus tile lama
-        if (transform.position.z <= destroyZ)
-        {
-            Destroy(gameObject);
-        }
     }
 
-    void SpawnNextTile()
+
+    void SpawnTile(int prefabIndex)
     {
-        if (nextTilePrefab == null || spawnPoint == null)
-        {
-            Debug.LogWarning("Next Tile Prefab atau Spawn Point belum diassign!");
-            return;
-        }
+        float currentY = 20f;
+        float newZ = activeTiles.Count > 0
+            ? activeTiles[activeTiles.Count - 1].transform.position.z + tileLength
+            : 0f;
 
-        // Pastikan Y tetap sama agar tile tidak turun
-        Vector3 pos = spawnPoint.position;
-        pos.y = transform.position.y;
+        Vector3 spawnPos = new Vector3(0, currentY, newZ);
+        GameObject tile = Instantiate(tilePrefabs[prefabIndex], spawnPos, Quaternion.identity);
+        activeTiles.Add(tile);
 
-        Instantiate(nextTilePrefab, pos, Quaternion.identity);
+        Debug.Log("Spawn ke: " + tes);
+        tes++;
     }
+
+    void MoveTileToFront(GameObject tile)
+    {
+        // Hapus dari list depan
+        activeTiles.RemoveAt(0);
+
+        // Ambil tile terakhir di list (yang paling depan di dunia)
+        GameObject lastTile = activeTiles[activeTiles.Count - 1];
+
+        // Posisi tile baru = posisi tile terakhir + panjang tile
+        float newZ = lastTile.transform.position.z + tileLength;
+        float newY = lastTile.transform.position.y; // jaga konsistensi ketinggian
+
+        tile.transform.position = new Vector3(0, newY, newZ);
+
+        // Masukkan tile ke belakang list
+        activeTiles.Add(tile);
+    }
+
 }

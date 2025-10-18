@@ -98,12 +98,10 @@ public class Character : MonoBehaviour
 
         CharController.Move(move);
         currentX = nextX;
-        Debug.Log($"currentX={currentX}, newXPos={newXPos}");
     }
 
     public void OnDodgeEnd()
     {
-        Debug.Log("Dodge animation ended");
         anim.ResetTrigger("DodgeLeft");
         anim.ResetTrigger("DodgeRight");
         anim.SetBool("IsRunning", true);
@@ -112,7 +110,6 @@ public class Character : MonoBehaviour
 
     public void OnJumpEnd()
     {
-        Debug.Log("Jump animation ended");
         anim.ResetTrigger("Jump");
         anim.SetBool("IsRunning", true);
         anim.CrossFade("Run", 0.1f);
