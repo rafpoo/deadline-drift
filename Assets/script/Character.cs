@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     private Animator anim;
     private Vector3 verticalVelocity;
     private float targetX;
-
+    private bool isDead = false;
     private bool gravityEnabled = false;
 
     IEnumerator Start()
@@ -113,37 +113,36 @@ public class Character : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.CompareTag("Obstacle"))
+        if (hit.gameObject.CompareTag("Obstacle"))
         {
-            // Hit normal mengarah ke belakang player?
-            Vector3 hitDir = hit.normal; // arah permukaan yang ditabrak
-
-            // Asumsi player menghadap ke depan (Z+)
-            bool frontalHit = Vector3.Dot(hitDir, Vector3.back) > 0.5f;
-
-            if (frontalHit)
-            {
-                Debug.Log("💥 Player menabrak obstacle dari depan!");
-                GameOver();
-            }
+            Die();
         }
     }
 
-    void GameOver()
+    void Die()
     {
-        Debug.Log("GAME OVER!");
+        if (isDead) return;
+        isDead = true;
 
+        // Matikan movement
+        GetComponent<CharacterController>().enabled = false;
+
+        // Jalankan animasi
         anim.SetBool("IsRunning", false);
-        anim.SetTrigger("Death"); // pastikan punya animasi "Death"
+        anim.SetTrigger("Death");
 
-        // Nonaktifkan pergerakan
-        enabled = false;
-
-        // (Opsional) Panggil UI manager / restart scene
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // Beri sedikit delay sebelum game over muncul
+        Invoke(nameof(TriggerGameOver), 1.5f);
     }
 
+    void TriggerGameOver()
+    {
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
 
     public void OnDodgeEnd()
     {

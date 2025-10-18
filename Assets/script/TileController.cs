@@ -44,21 +44,25 @@ public class TileManager : MonoBehaviour
 
     void Update()
     {
+        // ✅ Berhenti jika game over
+        if (GameManager.Instance != null && GameManager.Instance.IsGameOver)
+            return;
+
+        // Gerakkan semua tile ke belakang
         foreach (var tile in activeTiles)
             tile.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
 
+        // Cek tile paling depan, kalau sudah keluar kamera → pindahkan ke depan
         GameObject firstTile = activeTiles[0];
 
-        // Hitung jarak player ke tile paling belakang
         float distanceFromPlayer = player.position.z - firstTile.transform.position.z;
 
-        // Jika player sudah cukup jauh dari tile belakang → geser tile ke depan
         if (distanceFromPlayer > tileLength * recycleDistanceMultiplier)
         {
             MoveTileToFront(firstTile);
         }
-
     }
+
 
 
     void SpawnTile(int prefabIndex)

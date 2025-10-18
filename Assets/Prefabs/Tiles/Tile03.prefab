@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7088990607584325567}
   m_Layer: 0
   m_Name: shelves1
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,6 +241,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2360312697729259769, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2360312697729259769, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -357,12 +361,20 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6065683259454537566, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065683259454537566, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6307319507887189405, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614379429281723116, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 6614379429281723116, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -405,8 +417,16 @@ PrefabInstance:
       value: Floor1
       objectReference: {fileID: 0}
     - target: {fileID: 8751334694900843067, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751334694900843067, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900890331364684978, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8900890331364684978, guid: c25183ab6b26e0b4e8c587e51f6562eb, type: 3}
       propertyPath: m_StaticEditorFlags
