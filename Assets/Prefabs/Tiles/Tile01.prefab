@@ -7878,37 +7878,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 58.941444, y: 516.00024, z: 60.20956}
   m_Center: {x: -0.0049363375, y: 257.9972, z: -15.188763}
---- !u!1 &1045262449078957296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3892942537216287474}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (8)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3892942537216287474
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045262449078957296}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7, y: -14.71, z: 3.64}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054699579815978585
 GameObject:
   m_ObjectHideFlags: 0
@@ -17244,37 +17213,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &2118711689108799610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 454316153721674102}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &454316153721674102
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118711689108799610}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -14.71, z: -12.98}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122991029083751298
 GameObject:
   m_ObjectHideFlags: 0
@@ -23570,37 +23508,6 @@ Transform:
   - {fileID: 3322567750219009894}
   m_Father: {fileID: 4668301759949049764}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &2877402309789165150
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6075158516571761522}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (9)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6075158516571761522
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877402309789165150}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7, y: -14.71, z: 1.47}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2884829047148092670
 GameObject:
   m_ObjectHideFlags: 0
@@ -26200,37 +26107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 16.631798, y: 4.5448637, z: 16.63842}
   m_Center: {x: -0.025131254, y: 0.41652742, z: -0.39330497}
---- !u!1 &3160271793443288047
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7104942930420225344}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7104942930420225344
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160271793443288047}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -14.71, z: -18.32}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3166216074733187450
 GameObject:
   m_ObjectHideFlags: 0
@@ -45950,37 +45826,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 16.631798, y: 4.5448637, z: 16.63842}
   m_Center: {x: -0.02438548, y: 0.41653505, z: -0.39330497}
---- !u!1 &5817638154176504493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7748457124386890386}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7748457124386890386
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5817638154176504493}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -14.71, z: -14.71}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5837065319069336662
 GameObject:
   m_ObjectHideFlags: 0
@@ -52260,37 +52105,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 58.941444, y: 516.00024, z: 60.20956}
   m_Center: {x: 0.005187869, y: 257.99536, z: -15.192913}
---- !u!1 &6513899324617871434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 308636378090569776}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &308636378090569776
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6513899324617871434}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -14.71, z: -9.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6526980628452420232
 GameObject:
   m_ObjectHideFlags: 0
@@ -55633,16 +55447,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 454316153721674102}
-  - {fileID: 308636378090569776}
-  - {fileID: 5043122900809782912}
-  - {fileID: 445793511628178181}
-  - {fileID: 3892942537216287474}
-  - {fileID: 6075158516571761522}
-  - {fileID: 7259392115433980980}
-  - {fileID: 7748457124386890386}
-  - {fileID: 7104942930420225344}
-  - {fileID: 8232470786579952450}
+  - {fileID: 1349402195275132428}
   - {fileID: 524249657229786857}
   - {fileID: 2072850698520195517}
   - {fileID: 568202088967188887}
@@ -55664,16 +55469,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kertasPrefab: {fileID: 0}
   spawnPoints:
-  - {fileID: 454316153721674102}
-  - {fileID: 308636378090569776}
-  - {fileID: 5043122900809782912}
-  - {fileID: 445793511628178181}
-  - {fileID: 3892942537216287474}
-  - {fileID: 6075158516571761522}
-  - {fileID: 7259392115433980980}
-  - {fileID: 7748457124386890386}
-  - {fileID: 7104942930420225344}
-  - {fileID: 8232470786579952450}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &7031365817088284065
 GameObject:
   m_ObjectHideFlags: 0
@@ -57220,37 +57025,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.325749, y: 6.3257494, z: 12.065228}
   m_Center: {x: 0.017581943, y: -0.009000659, z: 3.3094923}
---- !u!1 &7313296270070393618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7259392115433980980}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7259392115433980980
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7313296270070393618}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -14.71, z: -10.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7335079688260548699
 GameObject:
   m_ObjectHideFlags: 0
@@ -60556,37 +60330,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.325749, y: 6.3257494, z: 12.065228}
   m_Center: {x: 0.018153194, y: -0.009000659, z: 3.3094923}
---- !u!1 &7701538554930121466
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8232470786579952450}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8232470786579952450
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7701538554930121466}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -14.71, z: -16.57}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7711256701046332657
 GameObject:
   m_ObjectHideFlags: 0
@@ -68731,37 +68474,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.6486554, y: 19.659998, z: 1.2891408}
   m_Center: {x: -0.00034808117, y: 0.061593518, z: -0.029376034}
---- !u!1 &8527835964743925583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 445793511628178181}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &445793511628178181
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8527835964743925583}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7, y: -14.71, z: -2.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8529558087739994813
 GameObject:
   m_ObjectHideFlags: 0
@@ -71748,37 +71460,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 115.80669, y: 516.00024, z: 60.20956}
   m_Center: {x: -28.427662, y: 257.99365, z: -15.198162}
---- !u!1 &8858923117423766455
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5043122900809782912}
-  m_Layer: 0
-  m_Name: PaperSpawnpoint (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5043122900809782912
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8858923117423766455}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7, y: -14.71, z: -0.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 104756139202105432}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8880106756856514781
 GameObject:
   m_ObjectHideFlags: 0
@@ -73915,3 +73596,69 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.6486554, y: 19.659998, z: 1.2891408}
   m_Center: {x: -0.001224031, y: 0.06170033, z: -0.029416088}
+--- !u!1001 &4231231966343313783
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 104756139202105432}
+    m_Modifications:
+    - target: {fileID: 2659219250222046844, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_Name
+      value: Roof
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 12.306307
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2217407
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.239422
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+--- !u!4 &1349402195275132428 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2882955958754613115, guid: 171de25d9683122418aaace3a0b542b3, type: 3}
+  m_PrefabInstance: {fileID: 4231231966343313783}
+  m_PrefabAsset: {fileID: 0}
