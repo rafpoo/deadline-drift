@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; // buat akses tombol UI
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverText;
     [SerializeField] private Button retryButton;
 
-
     private bool isGameOver = false;
     private int score;
-    public bool IsGameOver => isGameOver; // 👈 getter publik
-
+    public bool IsGameOver => isGameOver;
 
     void Awake()
     {
@@ -34,13 +32,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
+
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
         UpdateScoreUI();
 
         if (retryButton != null)
-            retryButton.onClick.AddListener(RestartGame);
+            retryButton.onClick.AddListener(ReturnToMainMenu);
     }
 
     public void AddScore(int amount)
@@ -63,11 +62,9 @@ public class GameManager : MonoBehaviour
 
         isGameOver = true;
 
-        // Stop pergerakan waktu di tile
         if (TileManager.Instance != null)
             TileManager.Instance.StopTiles();
 
-        // Stop skor
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.StopScoring();
 
@@ -80,19 +77,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over triggered!");
     }
 
-
-    public void RestartGame()
+    public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
         isGameOver = false;
 
-        if (TileManager.Instance != null)
-            TileManager.Instance.ResetTiles();
-
-        if (ScoreManager.Instance != null)
-            ScoreManager.Instance.ResetScore();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("MainMenu");
     }
-
 }

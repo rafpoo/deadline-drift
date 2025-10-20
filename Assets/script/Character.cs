@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public float gravity = -30f;
     public float forwardSpeed = 2f;
     public float xValue = 3f; // bukan -3f
+    public float gameOverDelay = 2f;
 
 
     private CharacterController controller;
@@ -144,7 +145,7 @@ public class Character : MonoBehaviour
         anim.SetTrigger("Death");
 
         // Beri sedikit delay sebelum game over muncul
-        Invoke(nameof(TriggerGameOver), 1.5f);
+        Invoke(nameof(TriggerGameOver), gameOverDelay);
     }
 
     void TriggerGameOver()

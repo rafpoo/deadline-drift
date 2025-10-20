@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,24 +30,32 @@ public class TileManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    void Start()
+    IEnumerator Start()
     {
-        baseMoveSpeed = moveSpeed;
-
+        // Spawn semua tile dulu
         for (int i = 0; i < numberOfTiles; i++)
         {
             SpawnTile(i < 2 ? 0 : Random.Range(0, tilePrefabs.Length));
         }
 
+        // Tunggu 1 frame biar semua posisi tile stabil
+        yield return null;
+
+        // Baru posisikan player
         if (player != null)
         {
-            // Gunakan spawn point khusus kalau ada
             if (playerSpawnPoint != null)
+            {
                 player.position = playerSpawnPoint.position;
+            }
             else if (activeTiles.Count > 0)
             {
                 Vector3 startPos = activeTiles[0].transform.position;
-                player.position = new Vector3(startPos.x + playerXOffset, startPos.y + playerYOffset, startPos.z + playerZOffset);
+                player.position = new Vector3(
+                    startPos.x + playerXOffset,
+                    startPos.y + playerYOffset,
+                    startPos.z + playerZOffset
+                );
             }
         }
     }
