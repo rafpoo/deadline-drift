@@ -24,14 +24,16 @@ public class Character : MonoBehaviour
 
     IEnumerator Start()
     {
+        transform.position = new Vector3(0f, transform.position.y, transform.position.z); // pastikan di tengah
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        targetX = transform.position.x;
+        targetX = 0f; // pastikan target lane adalah MID
         anim.SetBool("IsRunning", true);
 
         yield return new WaitForSeconds(0.1f);
         gravityEnabled = true;
     }
+
 
     void Update()
     {
