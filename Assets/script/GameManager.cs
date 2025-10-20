@@ -9,37 +9,52 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private GameObject gameOverTextObject;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text gameOverText;
     [SerializeField] private Button retryButton;
 
-    private TMP_Text gameOverText;
 
     private bool isGameOver = false;
+    private int score;
     public bool IsGameOver => isGameOver; // 👈 getter publik
+
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
     }
 
-
     void Start()
     {
-        gameOverText = gameOverTextObject.GetComponent<TMP_Text>();
-
+        Time.timeScale = 1f;
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
 
+        UpdateScoreUI();
+
         if (retryButton != null)
             retryButton.onClick.AddListener(RestartGame);
+    }
+
+    public void AddScore(int amount)
+    {
+        if (isGameOver) return;
+
+        score += amount;
+        UpdateScoreUI();
+    }
+
+    void UpdateScoreUI()
+    {
+        if (scoreText != null)
+            scoreText.text = "Score: " + score.ToString();
     }
 
     public void GameOver()
@@ -47,22 +62,36 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         isGameOver = true;
-        // ❌ jangan pakai Time.timeScale = 0
-        // biarkan physics tetap jalan
+
+        // Stop pergerakan waktu di tile
+        if (TileManager.Instance != null)
+            TileManager.Instance.StopTiles();
+
+        // Stop skor
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.StopScoring();
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
 
         if (gameOverText != null)
-            gameOverText.text = "💥 GAME OVER 💥";
+            gameOverText.text = "💥 GAME OVER 💥\nScore: " + ScoreManager.Instance.GetFinalScore();
 
         Debug.Log("Game Over triggered!");
     }
 
+
     public void RestartGame()
     {
-        Debug.Log("RestartGame() called!");
         Time.timeScale = 1f;
+        isGameOver = false;
+
+        if (TileManager.Instance != null)
+            TileManager.Instance.ResetTiles();
+
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.ResetScore();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

@@ -13,16 +13,26 @@ public class TileManager : MonoBehaviour
     [SerializeField] private float playerZOffset = -5f;
     [SerializeField] private float playerXOffset = 0.29f;
     [SerializeField] private float recycleDistanceMultiplier = 1.5f;
-    [SerializeField] private Transform playerSpawnPoint; // assign di Inspector
-
-
+    [SerializeField] private Transform playerSpawnPoint;
 
     private List<GameObject> activeTiles = new List<GameObject>();
     private float spawnZ = 0f;
-    private int tes = 0;
+    private bool isMoving = true;
+    private float baseMoveSpeed;
+
+    public static TileManager Instance { get; private set; }
+
+    void Awake()
+    {
+        // Singleton (biar mudah diakses dari GameManager)
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     void Start()
     {
+        baseMoveSpeed = moveSpeed;
+
         for (int i = 0; i < numberOfTiles; i++)
         {
             SpawnTile(i < 2 ? 0 : Random.Range(0, tilePrefabs.Length));
@@ -30,40 +40,37 @@ public class TileManager : MonoBehaviour
 
         if (player != null)
         {
-            // Gunakan spawn point khusus jika diset
+            // Gunakan spawn point khusus kalau ada
             if (playerSpawnPoint != null)
                 player.position = playerSpawnPoint.position;
             else if (activeTiles.Count > 0)
             {
                 Vector3 startPos = activeTiles[0].transform.position;
-                player.position = new Vector3(startPos.x, startPos.y + playerYOffset, startPos.z + playerZOffset);
+                player.position = new Vector3(startPos.x + playerXOffset, startPos.y + playerYOffset, startPos.z + playerZOffset);
             }
         }
-
     }
 
     void Update()
     {
-        // ✅ Berhenti jika game over
+        if (!isMoving) return;
         if (GameManager.Instance != null && GameManager.Instance.IsGameOver)
+        {
+            StopTiles();
             return;
+        }
 
         // Gerakkan semua tile ke belakang
         foreach (var tile in activeTiles)
             tile.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
 
-        // Cek tile paling depan, kalau sudah keluar kamera → pindahkan ke depan
+        // Cek tile paling depan, kalau sudah jauh dari player → pindah ke depan
         GameObject firstTile = activeTiles[0];
-
         float distanceFromPlayer = player.position.z - firstTile.transform.position.z;
 
         if (distanceFromPlayer > tileLength * recycleDistanceMultiplier)
-        {
             MoveTileToFront(firstTile);
-        }
     }
-
-
 
     void SpawnTile(int prefabIndex)
     {
@@ -75,27 +82,32 @@ public class TileManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(0, currentY, newZ);
         GameObject tile = Instantiate(tilePrefabs[prefabIndex], spawnPos, Quaternion.identity);
         activeTiles.Add(tile);
-
-        Debug.Log("Spawn ke: " + tes);
-        tes++;
     }
 
     void MoveTileToFront(GameObject tile)
     {
-        // Hapus dari list depan
         activeTiles.RemoveAt(0);
 
-        // Ambil tile terakhir di list (yang paling depan di dunia)
         GameObject lastTile = activeTiles[activeTiles.Count - 1];
-
-        // Posisi tile baru = posisi tile terakhir + panjang tile
         float newZ = lastTile.transform.position.z + tileLength;
-        float newY = lastTile.transform.position.y; // jaga konsistensi ketinggian
+        float newY = lastTile.transform.position.y;
 
         tile.transform.position = new Vector3(0, newY, newZ);
 
-        // Masukkan tile ke belakang list
         activeTiles.Add(tile);
     }
 
+    // 🔹 Dipanggil saat game over
+    public void StopTiles()
+    {
+        isMoving = false;
+        moveSpeed = 0f;
+    }
+
+    // 🔹 Dipanggil ulang saat retry
+    public void ResetTiles()
+    {
+        isMoving = true;
+        moveSpeed = baseMoveSpeed;
+    }
 }

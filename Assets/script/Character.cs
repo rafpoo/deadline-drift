@@ -88,6 +88,16 @@ public class Character : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectible"))
+        {
+            GameManager.Instance.AddScore(1); // tambah skor 1
+            Destroy(other.gameObject); // hapus kertas
+        }
+    }
+
+
     void ApplyGravity()
     {
         if (!gravityEnabled) return;
