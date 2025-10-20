@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: T_YFAM_WoodFlooring_d
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: 260c7592c895c13499593548ebe64da2, type: 2}
+  m_Parent: {fileID: 2100000, guid: 14142751301906948b5158e66d86878a, type: 2}
   m_ModifiedSerializedProperties: 4
   m_ValidKeywords: []
   m_InvalidKeywords: []
