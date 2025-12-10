@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI countdownText;
     public float countdownTime = 3.5f;
-    public bool IsGameStarted { get; private set; } = false;
 
     void Awake()
     {
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
 
         if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
@@ -47,29 +46,6 @@ public class GameManager : MonoBehaviour
         if (retryButton != null)
             retryButton.onClick.AddListener(ReturnToMainMenu);
 
-        StartCoroutine(StartCountdown());
-    }
-
-    IEnumerator StartCountdown()
-    {
-        countdownText.gameObject.SetActive(true);
-
-        int count = 3;
-        while (count > 0)
-        {
-            countdownText.text = count.ToString();
-            yield return new WaitForSecondsRealtime(1f);
-            count--;
-        }
-
-        countdownText.text = "GO!";
-        yield return new WaitForSecondsRealtime(1f);
-
-        countdownText.gameObject.SetActive(false);
-
-        // Mulai game setelah countdown selesai
-        Time.timeScale = 1f;
-        IsGameStarted = true;
     }
 
 

@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if (isDead || !GameManager.Instance.IsGameStarted) return;
+        if (isDead) return;
 
         HandleInput();
         ApplyGravity();
