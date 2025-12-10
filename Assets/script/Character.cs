@@ -38,7 +38,8 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return;
+        if (isDead || !GameManager.Instance.IsGameStarted) return;
+
         HandleInput();
         ApplyGravity();
         MoveCharacter();
@@ -129,6 +130,7 @@ public class Character : MonoBehaviour
     {
         if (hit.gameObject.CompareTag("Obstacle"))
         {
+            Debug.Log("Tersentuh obstacle: " + hit.gameObject.name);
             // Jika mendarat dari atas → aman
             if (verticalVelocity.y < 0 && hit.normal.y > 0.5f)
                 return;
@@ -139,23 +141,49 @@ public class Character : MonoBehaviour
 
     }
 
+
+    void Reset()
+    {
+        // side = SIDE.MID;
+        // targetX = 0f;
+        if (side == SIDE.LEFT)
+        {
+            targetX = laneDistance;
+            anim.SetTrigger("DodgeRight");
+        }
+        else if (side == SIDE.RIGHT)
+        {
+            targetX = -laneDistance;
+            anim.SetTrigger("DodgeLeft");
+        }
+        else
+        {
+            targetX = 0f;
+        }
+        side = SIDE.MID;
+    }
+
     void Die()
     {
         if (isDead) return;
-        isDead = true;
-        forwardSpeed = 0f;
+        GameManager.Instance.deathCount += 1;
+        Debug.Log("Character died! Total deaths: " + GameManager.Instance.deathCount);
+        // isDead = true;
+        if (GameManager.Instance.deathCount == 4)
+        {
+            isDead = true;
 
-        // Matikan movement
-        GetComponent<CharacterController>().enabled = false;
+            // Matikan movement
+            GetComponent<CharacterController>().enabled = false;
 
-        // Jalankan animasi
-        anim.SetBool("IsRunning", false);
-        anim.SetTrigger("Death");
+            // Jalankan animasi
+            anim.SetBool("IsRunning", false);
+            anim.SetTrigger("Death");
+            TileManager.Instance.StopTiles();
 
-        TileManager.Instance.StopTiles();
-
-        // Beri sedikit delay sebelum game over muncul
-        Invoke(nameof(TriggerGameOver), gameOverDelay);
+            // Beri sedikit delay sebelum game over muncul
+            Invoke(nameof(TriggerGameOver), gameOverDelay);
+        }
     }
 
     void TriggerGameOver()

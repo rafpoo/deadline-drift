@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1396053690811622200}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.1302404, z: 28.16}
+  m_LocalPosition: {x: 0, y: -1.7900009, z: 28.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -210,7 +210,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7661688736278924844}
-  - component: {fileID: 1579411477992566406}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -238,20 +237,6 @@ Transform:
   - {fileID: 901437822579889978}
   m_Father: {fileID: 2507503510337863407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1579411477992566406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8485407501198014524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1240bd0c6160204cbd3e3418d6be9a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kertasPrefab: {fileID: 0}
-  spawnPoints: []
 --- !u!1001 &2736128846954800000
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class TileManager : MonoBehaviour
 
     private List<GameObject> activeTiles = new List<GameObject>();
     private Animator anim;
-    private float spawnpoint;
+
     private bool isMoving = true;
     private float baseMoveSpeed;
 

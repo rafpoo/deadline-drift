@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0ec2f3fb50ec2af42a5ddb1dd29cf5d4, type: 3}
       propertyPath: m_Name
-      value: P_Sphere
+      value: P_YFAM_Sphere
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0ec2f3fb50ec2af42a5ddb1dd29cf5d4, type: 3}
       propertyPath: m_StaticEditorFlags
