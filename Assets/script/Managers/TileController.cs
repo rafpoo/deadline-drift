@@ -10,7 +10,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private GameObject[] tilePrefabsLevel3;
     [SerializeField] private int numberOfTiles = 10;
     [SerializeField] private float tileLength = 49.48f;
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] public float moveSpeed = 5f;
     [SerializeField] private Transform player;
     [SerializeField] private float playerYOffset = 1f;
     [SerializeField] private float playerZOffset = -5f;

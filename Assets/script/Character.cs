@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public float forwardSpeed = 2f;
     public float xValue = 3f; // bukan -3f
     public float gameOverDelay = 2f;
+    public float invincibleDuration = 3f;
 
 
     private CharacterController controller;
@@ -22,6 +23,7 @@ public class Character : MonoBehaviour
     private float targetX;
     private bool isDead = false;
     private bool gravityEnabled = false;
+    private bool isInvincible = false;
 
     IEnumerator Start()
     {
@@ -166,10 +168,18 @@ public class Character : MonoBehaviour
     void Die()
     {
         if (isDead) return;
+
+        if (isInvincible)
+            return;
+
+        StartCoroutine(StartInvincible()); // aktifkan invincibility
+
         GameManager.Instance.deathCount += 1;
+        StageManager.Instance.OnPlayerHit(GameManager.Instance.deathCount);
+
         Debug.Log("Character died! Total deaths: " + GameManager.Instance.deathCount);
         // isDead = true;
-        if (GameManager.Instance.deathCount == 4)
+        if (GameManager.Instance.deathCount >= 4)
         {
             isDead = true;
 
@@ -185,6 +195,36 @@ public class Character : MonoBehaviour
             Invoke(nameof(TriggerGameOver), gameOverDelay);
         }
     }
+
+    IEnumerator StartInvincible()
+    {
+        isInvincible = true;
+
+        // (Optional) player flashing  👇
+        StartCoroutine(FlashPlayer());
+
+        yield return new WaitForSeconds(invincibleDuration);
+
+        isInvincible = false;
+    }
+
+    IEnumerator FlashPlayer()
+    {
+        Renderer rend = GetComponentInChildren<Renderer>();
+
+        float flashSpeed = 0.15f;
+
+        while (isInvincible)
+        {
+            rend.enabled = false;
+            yield return new WaitForSeconds(flashSpeed);
+
+            rend.enabled = true;
+            yield return new WaitForSeconds(flashSpeed);
+        }
+    }
+
+
 
     void TriggerGameOver()
     {
