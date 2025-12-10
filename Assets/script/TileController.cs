@@ -6,6 +6,8 @@ public class TileManager : MonoBehaviour
 {
     [Header("Tile Settings")]
     [SerializeField] private GameObject[] tilePrefabs;
+    [SerializeField] private GameObject[] tilePrefabsLevel2;
+    [SerializeField] private GameObject[] tilePrefabsLevel3;
     [SerializeField] private int numberOfTiles = 10;
     [SerializeField] private float tileLength = 49.48f;
     [SerializeField] private float moveSpeed = 5f;
@@ -17,7 +19,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
 
     private List<GameObject> activeTiles = new List<GameObject>();
-    private float spawnZ = 0f;
+    private float spawnpoint;
     private bool isMoving = true;
     private float baseMoveSpeed;
 
@@ -42,22 +44,29 @@ public class TileManager : MonoBehaviour
         yield return null;
 
         // Baru posisikan player
-        if (player != null)
+        // if (player != null)
+        // {
+        //     if (playerSpawnPoint != null)
+        //     {
+        //         player.position = playerSpawnPoint.position;
+        //     }
+        //     else if (activeTiles.Count > 0)
+        //     {
+        //         Vector3 startPos = activeTiles[0].transform.position;
+        //         player.position = new Vector3(
+        //             startPos.x + playerXOffset,
+        //             startPos.y + playerYOffset,
+        //             startPos.z + playerZOffset
+        //         );
+        //     }
+        // }
+
+        if (player != null && playerSpawnPoint != null)
         {
-            if (playerSpawnPoint != null)
-            {
-                player.position = playerSpawnPoint.position;
-            }
-            else if (activeTiles.Count > 0)
-            {
-                Vector3 startPos = activeTiles[0].transform.position;
-                player.position = new Vector3(
-                    startPos.x + playerXOffset,
-                    startPos.y + playerYOffset,
-                    startPos.z + playerZOffset
-                );
-            }
+            player.position = playerSpawnPoint.position;
         }
+
+
     }
 
     void Update()
@@ -83,7 +92,7 @@ public class TileManager : MonoBehaviour
 
     void SpawnTile(int prefabIndex)
     {
-        float currentY = 20f;
+        float currentY = 0f;
         float newZ = activeTiles.Count > 0
             ? activeTiles[activeTiles.Count - 1].transform.position.z + tileLength
             : 0f;
