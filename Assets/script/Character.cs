@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return;
         HandleInput();
         ApplyGravity();
         MoveCharacter();
@@ -128,14 +129,21 @@ public class Character : MonoBehaviour
     {
         if (hit.gameObject.CompareTag("Obstacle"))
         {
+            // Jika mendarat dari atas → aman
+            if (verticalVelocity.y < 0 && hit.normal.y > 0.5f)
+                return;
+
+            // Jika kena dari samping/depan → mati
             Die();
         }
+
     }
 
     void Die()
     {
         if (isDead) return;
         isDead = true;
+        forwardSpeed = 0f;
 
         // Matikan movement
         GetComponent<CharacterController>().enabled = false;
@@ -143,6 +151,8 @@ public class Character : MonoBehaviour
         // Jalankan animasi
         anim.SetBool("IsRunning", false);
         anim.SetTrigger("Death");
+
+        TileManager.Instance.StopTiles();
 
         // Beri sedikit delay sebelum game over muncul
         Invoke(nameof(TriggerGameOver), gameOverDelay);
