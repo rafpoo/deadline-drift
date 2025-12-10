@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public float forwardSpeed = 2f;
     public float xValue = 3f; // bukan -3f
     public float gameOverDelay = 2f;
+    public float invincibleDuration = 3f;
 
 
     private CharacterController controller;
@@ -22,6 +23,7 @@ public class Character : MonoBehaviour
     private float targetX;
     private bool isDead = false;
     private bool gravityEnabled = false;
+    private bool isInvincible = false;
 
     IEnumerator Start()
     {
@@ -39,6 +41,7 @@ public class Character : MonoBehaviour
     void Update()
     {
         if (isDead) return;
+
         HandleInput();
         ApplyGravity();
         MoveCharacter();
@@ -129,6 +132,7 @@ public class Character : MonoBehaviour
     {
         if (hit.gameObject.CompareTag("Obstacle"))
         {
+            Debug.Log("Tersentuh obstacle: " + hit.gameObject.name);
             // Jika mendarat dari atas → aman
             if (verticalVelocity.y < 0 && hit.normal.y > 0.5f)
                 return;
@@ -139,24 +143,88 @@ public class Character : MonoBehaviour
 
     }
 
+
+    void Reset()
+    {
+        // side = SIDE.MID;
+        // targetX = 0f;
+        if (side == SIDE.LEFT)
+        {
+            targetX = laneDistance;
+            anim.SetTrigger("DodgeRight");
+        }
+        else if (side == SIDE.RIGHT)
+        {
+            targetX = -laneDistance;
+            anim.SetTrigger("DodgeLeft");
+        }
+        else
+        {
+            targetX = 0f;
+        }
+        side = SIDE.MID;
+    }
+
     void Die()
     {
         if (isDead) return;
-        isDead = true;
-        forwardSpeed = 0f;
 
-        // Matikan movement
-        GetComponent<CharacterController>().enabled = false;
+        if (isInvincible)
+            return;
 
-        // Jalankan animasi
-        anim.SetBool("IsRunning", false);
-        anim.SetTrigger("Death");
+        StartCoroutine(StartInvincible()); // aktifkan invincibility
 
-        TileManager.Instance.StopTiles();
+        GameManager.Instance.deathCount += 1;
+        StageManager.Instance.OnPlayerHit(GameManager.Instance.deathCount);
 
-        // Beri sedikit delay sebelum game over muncul
-        Invoke(nameof(TriggerGameOver), gameOverDelay);
+        Debug.Log("Character died! Total deaths: " + GameManager.Instance.deathCount);
+        // isDead = true;
+        if (GameManager.Instance.deathCount >= 4)
+        {
+            isDead = true;
+
+            // Matikan movement
+            GetComponent<CharacterController>().enabled = false;
+
+            // Jalankan animasi
+            anim.SetBool("IsRunning", false);
+            anim.SetTrigger("Death");
+            TileManager.Instance.StopTiles();
+
+            // Beri sedikit delay sebelum game over muncul
+            Invoke(nameof(TriggerGameOver), gameOverDelay);
+        }
     }
+
+    IEnumerator StartInvincible()
+    {
+        isInvincible = true;
+
+        // (Optional) player flashing  👇
+        StartCoroutine(FlashPlayer());
+
+        yield return new WaitForSeconds(invincibleDuration);
+
+        isInvincible = false;
+    }
+
+    IEnumerator FlashPlayer()
+    {
+        Renderer rend = GetComponentInChildren<Renderer>();
+
+        float flashSpeed = 0.15f;
+
+        while (isInvincible)
+        {
+            rend.enabled = false;
+            yield return new WaitForSeconds(flashSpeed);
+
+            rend.enabled = true;
+            yield return new WaitForSeconds(flashSpeed);
+        }
+    }
+
+
 
     void TriggerGameOver()
     {
