@@ -19,6 +19,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
 
     private List<GameObject> activeTiles = new List<GameObject>();
+    private Animator anim;
     private float spawnpoint;
     private bool isMoving = true;
     private float baseMoveSpeed;
@@ -34,6 +35,8 @@ public class TileManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        anim = player.GetComponent<Animator>();
+        baseMoveSpeed = moveSpeed;
         // Spawn semua tile dulu
         for (int i = 0; i < numberOfTiles; i++)
         {
@@ -71,24 +74,32 @@ public class TileManager : MonoBehaviour
 
     void Update()
     {
-        if (!isMoving) return;
+        // Cek GameOver dulu
         if (GameManager.Instance != null && GameManager.Instance.IsGameOver)
         {
-            StopTiles();
+            if (isMoving)
+                StopTiles();  // set isMoving = false sekali saja
+
             return;
         }
 
-        // Gerakkan semua tile ke belakang
-        foreach (var tile in activeTiles)
-            tile.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
+        // Jika tile tidak bergerak, hentikan Update
+        if (!isMoving) return;
 
-        // Cek tile paling depan, kalau sudah jauh dari player → pindah ke depan
+        // Gerakkan semua tile
+        foreach (var tile in activeTiles)
+        {
+            tile.transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
+        }
+
+        // Recycle tile
         GameObject firstTile = activeTiles[0];
         float distanceFromPlayer = player.position.z - firstTile.transform.position.z;
 
         if (distanceFromPlayer > tileLength * recycleDistanceMultiplier)
             MoveTileToFront(firstTile);
     }
+
 
     void SpawnTile(int prefabIndex)
     {
