@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour
     public AudioClip bgmStage3_Horror;
 
     [Header("SFX")]
+    public AudioSource clockSource;
     public AudioSource sfxSource;
     public AudioClip thunderSFX;
     public AudioClip flashSFX;
@@ -97,6 +98,7 @@ public class StageManager : MonoBehaviour
         {
             bgmSource.clip = bgmStage3_Horror;
             bgmSource.Play();
+            clockSource.Play();
 
             if (horrorDarkOverlay != null)
                 horrorDarkOverlay.SetActive(true);
