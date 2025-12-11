@@ -6,6 +6,7 @@ public enum SIDE { LEFT, MID, RIGHT }
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
+    //aa
     public SIDE side = SIDE.MID;
     public float laneDistance = 3f;
     public float laneChangeSpeed = 8f;
@@ -192,7 +193,7 @@ public class Character : MonoBehaviour
             TileManager.Instance.StopTiles();
 
             // Beri sedikit delay sebelum game over muncul
-            Invoke(nameof(TriggerGameOver), gameOverDelay);
+            // Invoke(nameof(TriggerGameOver), gameOverDelay);
         }
     }
 
@@ -226,14 +227,14 @@ public class Character : MonoBehaviour
 
 
 
-    void TriggerGameOver()
-    {
+    // void TriggerGameOver()
+    // {
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.GameOver();
-        }
-    }
+    //     if (GameManager.Instance != null)
+    //     {
+    //         GameManager.Instance.GameOver();
+    //     }
+    // }
 
     public void OnDodgeEnd()
     {

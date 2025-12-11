@@ -47,7 +47,6 @@ public class ScoreManager : MonoBehaviour
         if (player != null)
         {
             float distance = player.position.z - startZ;
-            Debug.Log("Distance: " + distance);
             score = Mathf.Max(0, distance * scoreMultiplier);
             UpdateScoreUI();
         }
