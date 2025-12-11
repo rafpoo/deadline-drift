@@ -52,6 +52,8 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void OnPlayerHit(int hitCount)
     {
+        if (GameManager.Instance.IsGameOver)
+            return;
         // === STAGE 1 ===
         if (hitCount == 1)
         {
@@ -103,20 +105,19 @@ public class StageManager : MonoBehaviour
 
             // Tidak perlu ganti musik lagi karena game over
 
-            TriggerGameOverDelay();
+            StartCoroutine(TriggerGameOverDelay());
         }
     }
 
     IEnumerator TriggerGameOverDelay()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f); // KING bisa atur ini
 
-        // Layar jumpscare mati
         jumpScareScreen.SetActive(false);
 
-        // Game over UI muncul
         GameManager.Instance.GameOver();
     }
+
 
     IEnumerator FlashLightning(bool isThunder)
     {

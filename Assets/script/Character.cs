@@ -193,7 +193,7 @@ public class Character : MonoBehaviour
             TileManager.Instance.StopTiles();
 
             // Beri sedikit delay sebelum game over muncul
-            Invoke(nameof(TriggerGameOver), gameOverDelay);
+            // Invoke(nameof(TriggerGameOver), gameOverDelay);
         }
     }
 
@@ -227,14 +227,14 @@ public class Character : MonoBehaviour
 
 
 
-    void TriggerGameOver()
-    {
+    // void TriggerGameOver()
+    // {
 
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.GameOver();
-        }
-    }
+    //     if (GameManager.Instance != null)
+    //     {
+    //         GameManager.Instance.GameOver();
+    //     }
+    // }
 
     public void OnDodgeEnd()
     {
