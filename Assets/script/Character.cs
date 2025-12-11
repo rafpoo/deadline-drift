@@ -6,6 +6,7 @@ public enum SIDE { LEFT, MID, RIGHT }
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
+    //aa
     public SIDE side = SIDE.MID;
     public float laneDistance = 3f;
     public float laneChangeSpeed = 8f;
