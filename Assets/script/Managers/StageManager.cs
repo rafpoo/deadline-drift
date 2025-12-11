@@ -23,6 +23,9 @@ public class StageManager : MonoBehaviour
     public GameObject lightningFlash;
     public GameObject jumpScareScreen;
 
+    [Header("Dialogs")]
+    public GameObject[] stageDialogs; // 0: Stage 1, 1: Stage 2, 2: Stage 3
+
     private void Awake()
     {
         Instance = this;
@@ -37,6 +40,13 @@ public class StageManager : MonoBehaviour
             bgmSource.Play();
         }
 
+        foreach (GameObject dialog in stageDialogs)
+        {
+            if (dialog != null)
+                dialog.SetActive(false);
+        }
+
+
         if (jumpScareScreen != null)
             jumpScareScreen.SetActive(false);
 
@@ -45,6 +55,8 @@ public class StageManager : MonoBehaviour
 
         if (lightningFlash != null)
             lightningFlash.SetActive(false);
+
+        StartCoroutine(ShowDialog(stageDialogs[0])); // dialog stage 1
     }
 
     /// <summary>
@@ -62,7 +74,9 @@ public class StageManager : MonoBehaviour
 
             StartCoroutine(FlashLightning(false));
 
+
             TileManager.Instance.moveSpeed += 3f;
+            StartCoroutine(ShowDialog(stageDialogs[1]));
         }
 
         // === STAGE 2 ===
@@ -73,7 +87,9 @@ public class StageManager : MonoBehaviour
 
             StartCoroutine(FlashLightning(false));
 
+
             TileManager.Instance.moveSpeed += 3f;
+            StartCoroutine(ShowDialog(stageDialogs[2]));
         }
 
         // === STAGE 3 ===
@@ -90,6 +106,7 @@ public class StageManager : MonoBehaviour
             StartCoroutine(FlashLightning(true));
 
             TileManager.Instance.moveSpeed = 5f;
+            StartCoroutine(ShowDialog(stageDialogs[3]));
         }
 
         // === STAGE 4 === (Game Over → jumpscare)
@@ -141,6 +158,16 @@ public class StageManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         lightningFlash.SetActive(false);
+    }
+
+    public IEnumerator ShowDialog(GameObject dialog)
+    {
+        if (dialog != null)
+        {
+            dialog.SetActive(true);
+            yield return new WaitForSeconds(3f); // KING bisa atur ini
+            dialog.SetActive(false);
+        }
     }
 
 }
