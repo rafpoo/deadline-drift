@@ -11,6 +11,9 @@ public class TileManager : MonoBehaviour
     [SerializeField] private int numberOfTiles = 10;
     [SerializeField] private float tileLength = 49.48f;
     [SerializeField] public float moveSpeed = 5f;
+    private float speedIncrease = 0.5f;
+    private float increaseInterval = 2f;
+    [SerializeField] public float maxSpeed = 20f;
     [SerializeField] private Transform player;
     [SerializeField] private float playerYOffset = 1f;
     [SerializeField] private float playerZOffset = -5f;
@@ -69,7 +72,7 @@ public class TileManager : MonoBehaviour
             player.position = playerSpawnPoint.position;
         }
 
-
+        StartCoroutine(IncreaseSpeedOverTime());
     }
 
     void Update()
@@ -111,6 +114,21 @@ public class TileManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(0, currentY, newZ);
         GameObject tile = Instantiate(tilePrefabs[prefabIndex], spawnPos, Quaternion.identity);
         activeTiles.Add(tile);
+    }
+
+    IEnumerator IncreaseSpeedOverTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(increaseInterval);
+
+            if (!isMoving) continue; // stop kalau game over
+
+            moveSpeed += speedIncrease;
+            moveSpeed = Mathf.Clamp(moveSpeed, 0, maxSpeed);
+
+            // Debug.Log("Speed naik menjadi: " + moveSpeed);
+        }
     }
 
     void MoveTileToFront(GameObject tile)

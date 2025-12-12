@@ -123,6 +123,7 @@ public class StageManager : MonoBehaviour
             StartCoroutine(FlashLightning(true));
 
             // Tidak perlu ganti musik lagi karena game over
+            horrorDarkOverlay.SetActive(false);
 
             StartCoroutine(TriggerGameOverDelay());
         }
