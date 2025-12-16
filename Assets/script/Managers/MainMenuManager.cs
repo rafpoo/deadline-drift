@@ -7,6 +7,10 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
+    [Header("How to play Settings")]
+    [SerializeField] private GameObject howToPlayPanel;
+    [SerializeField] private Button howToPlayOpenButton;
+    [SerializeField] private Button howToPlayCloseButton;
 
     [Header("Scene Settings")]
     [SerializeField] private string gameSceneName = "SampleScene";
@@ -108,5 +112,15 @@ public class MainMenuManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    public void ToggleHowToPlay()
+    {
+        if (howToPlayPanel != null)
+        {
+            //berikan animasi fade in/out
+            bool isActive = howToPlayPanel.activeSelf;
+            howToPlayPanel.SetActive(!isActive);
+        }
     }
 }

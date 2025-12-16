@@ -88,7 +88,17 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         isGameOver = false;
+        Instance.deathCount = 0;
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1f;
+        isGameOver = false;
+        Instance.deathCount = 0;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

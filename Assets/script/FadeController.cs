@@ -62,7 +62,7 @@ public class FadeController : MonoBehaviour
             yield return null;
         }
 
-        fadeCanvas.alpha = 1;
+        // fadeCanvas.alpha = 1;
 
         SceneManager.LoadScene(sceneName);
     }
